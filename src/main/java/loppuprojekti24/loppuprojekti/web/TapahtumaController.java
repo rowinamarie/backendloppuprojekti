@@ -2,8 +2,8 @@ package loppuprojekti24.loppuprojekti.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -18,10 +18,12 @@ public class TapahtumaController {
 public String lista(@RequestParam (name= "parametrinnimi") String tapahtuma, Model model) {
     model.addAttribute("tapahtuma", tapahtuma);
     return "tapahtumatSivu";
+
+
 }
 
 
-@PostMapping("/lisaaTapahtuma")
+@GetMapping("/lisaaTapahtuma")
 public String addTapahtuma(@ModelAttribute Tapahtuma tapahtuma, Model model) {
      model.addAttribute("tapahtuma", tapahtuma);
     
