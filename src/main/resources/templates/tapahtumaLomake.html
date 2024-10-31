@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää uusi tapahtuma</h1>
+    <form action="#" th:action="@{/tapahtumaLomake}" th:object="${tapahtuma}" method="post">
+    	<table>
+        <tr>
+        	<td>Nimi: <input type="text" th:field="*{nimi}" /></td>
+        </tr>
+            <tr>
+            <td>sijainti: <input type="text" th:field="*{sijainti}" /></td>
+        </tr>
+            <tr>
+            <td>kuvaus: <input type="text" th:field="*{kuvaus}" /></td>
+        </tr>
+            
+        
+        </table>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+</html>
