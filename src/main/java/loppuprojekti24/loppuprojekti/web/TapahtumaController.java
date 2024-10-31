@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class TapahtumaController {
 
 @RequestMapping("/tapahtumat")
-public String lista(@RequestParam (name= "nimesi") String tapahtuma, Model model) {
+public String lista(@RequestParam (name= "parametrinnimi") String tapahtuma, Model model) {
     model.addAttribute("tapahtuma", tapahtuma);
     return "tapahtumatSivu";
 }
