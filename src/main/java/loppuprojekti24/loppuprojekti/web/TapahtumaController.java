@@ -18,7 +18,7 @@ public String returnTapahtumat() {
 
 @RequestMapping("osallistujat")
 @ResponseBody
-public String returnOsallistujat(@RequestParam (name="nimesi") String etunimi) {
+public String returnOsallistujat(@RequestParam (name="nimesi", required = false, defaultValue= "kirjoita nimesi parametriin") String etunimi) {
     return "Hei " + etunimi;
 }
 
