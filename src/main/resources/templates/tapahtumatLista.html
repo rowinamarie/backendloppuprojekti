@@ -7,9 +7,9 @@ xmlns:th="http://www.thymeleaf.org">
 </head>
 <body>
 	<h1>Result</h1>
-    <p th:text="'Nimi: ' + ${tapahtuma.nimi}" />
-    <p th:text="'Nimi: ' + ${tapahtuma.sijainti}" />
-    <p th:text="'message: ' + ${tapahtuma.kuvaus}" />
-    <a href="/lisaaTapahtuma">Submit another message</a>
+    <p th:text="'Tapahtuman nimi: ' + ${tapahtuma.nimi}" />
+    <p th:text="'Tapahtumapaikka: ' + ${tapahtuma.sijainti}" />
+    <p th:text="'Tapahtuman kuvaus: ' + ${tapahtuma.kuvaus}" />
+    <a href="/lisaaTapahtuma">Lisää uusi tapahtuma</a>
 </body>
 </html>
