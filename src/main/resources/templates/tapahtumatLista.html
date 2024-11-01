@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Tapahtumat</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Result</h1>
+    <p th:text="'Nimi: ' + ${tapahtuma.nimi}" />
+    <p th:text="'Nimi: ' + ${tapahtuma.sijainti}" />
+    <p th:text="'message: ' + ${tapahtuma.kuvaus}" />
+    <a href="/lisaaTapahtuma">Submit another message</a>
+</body>
+</html>

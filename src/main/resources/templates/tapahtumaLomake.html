@@ -6,7 +6,7 @@
 </head>
 <body>
 	<h1>Lisää uusi tapahtuma</h1>
-    <form action="#" th:action="@{/tapahtumaLomake}" th:object="${tapahtuma}" method="post">
+    <form th:action="@{/tapahtumaLista}" th:object="${tapahtuma}" method="post">
     	<table>
         <tr>
         	<td>Nimi: <input type="text" th:field="*{nimi}" /></td>
