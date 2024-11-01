@@ -13,6 +13,7 @@ import loppuprojekti24.loppuprojekti.domain.Tapahtuma;
 public class TapahtumaController {
 
 //hakee tapahtuman lisäyslomakkeen
+//GET-metodi näyttää lomakkeen luomalla uuden Tapahtuma-objektin
 @GetMapping("/lisaaTapahtuma")
 public String addTapahtuma(Model model) {
      model.addAttribute("tapahtuma", new Tapahtuma ());
@@ -20,12 +21,12 @@ public String addTapahtuma(Model model) {
 }
 
 // avaa tapahtumalistan
+//POST-metodi tallentaa lomakkeen tiedot ja näyttää ne seuraavassa näkymässä.
 @PostMapping("/tapahtumaLista")
 	public String showTapahtumaLista(@ModelAttribute Tapahtuma tapahtuma, Model model) {
 		model.addAttribute("tapahtuma", tapahtuma);
 		return "tapahtumatLista";
 	}
-
 
 
 // viimeinen loppusulku
