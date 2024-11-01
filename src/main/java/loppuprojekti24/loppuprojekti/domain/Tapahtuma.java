@@ -1,11 +1,19 @@
 package loppuprojekti24.loppuprojekti.domain;
 
+import org.springframework.boot.autoconfigure.web.WebProperties;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 
+@Entity
 public class Tapahtuma {
 
-  
+  @Id
+  @GeneratedValue (strategy = GenerationType.AUTO)
     private Long id;
+    
     private String nimi;
     private String sijainti;
     private String kuvaus;
