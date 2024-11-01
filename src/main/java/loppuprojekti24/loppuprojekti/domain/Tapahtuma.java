@@ -20,8 +20,8 @@ public class Tapahtuma {
 
     public Tapahtuma () {}
 
-    public Tapahtuma(Long id, String nimi, String sijainti, String kuvaus) {
-        this.id = id;
+    public Tapahtuma(String nimi, String sijainti, String kuvaus) {
+        super ();
         this.nimi = nimi;
         this.sijainti = sijainti;
         this.kuvaus = kuvaus;

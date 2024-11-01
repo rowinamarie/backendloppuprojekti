@@ -1,15 +1,20 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Tapahtumat</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Tapahtumalista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Tapahtuman tiedot</h1>
-    <p th:text="'Tapahtuman nimi: ' + ${tapahtuma.nimi}" />
-    <p th:text="'Tapahtumapaikka: ' + ${tapahtuma.sijainti}" />
-    <p th:text="'Tapahtuman kuvaus: ' + ${tapahtuma.kuvaus}" />
-    <a href="/lisaaTapahtuma">Lisää uusi tapahtuma</a>
+	<h1>Kaikki tulevat tapahtumat</h1>
+    <table>
+		<tr>
+		    <th>Tapahtuma nimi</th>
+		    <th>Paikka</th>
+		</tr>  
+    	<tr th:each = "tapahtuma : ${tapahtumat}">
+    		<td th:text="${tapahtuma.nimi}"></td>
+    		<td th:text="${tapahtuma.sijainti}"></td>		
+    	</tr>
+     </table>
 </body>
 </html>
