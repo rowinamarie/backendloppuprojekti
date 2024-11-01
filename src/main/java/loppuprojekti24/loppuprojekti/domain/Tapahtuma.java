@@ -18,6 +18,17 @@ public class Tapahtuma {
     private String sijainti;
     private String kuvaus;
 
+    public Tapahtuma () {}
+
+    public Tapahtuma(Long id, String nimi, String sijainti, String kuvaus) {
+        this.id = id;
+        this.nimi = nimi;
+        this.sijainti = sijainti;
+        this.kuvaus = kuvaus;
+    }
+    
+
+
     public Long getId() {
         return id;
     }
