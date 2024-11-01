@@ -21,7 +21,7 @@ public String addTapahtuma(Model model) {
 
 // avaa tapahtumalistan
 @PostMapping("/tapahtumaLista")
-	public String greetingSubmit(@ModelAttribute Tapahtuma tapahtuma, Model model) {
+	public String showTapahtumaLista(@ModelAttribute Tapahtuma tapahtuma, Model model) {
 		model.addAttribute("tapahtuma", tapahtuma);
 		return "tapahtumatLista";
 	}
