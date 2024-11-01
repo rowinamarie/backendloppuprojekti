@@ -20,10 +20,10 @@ public String addTapahtuma(Model model) {
     return "tapahtumaLomake";
 }
 
-// avaa tapahtumalistan
+// avaa yksittäisen tapahtuman, muokkaa polkua myöhemmin
 //POST-metodi tallentaa lomakkeen tiedot ja näyttää ne seuraavassa näkymässä.
 @PostMapping("/tapahtumaLista")
-	public String showTapahtumaLista(@ModelAttribute Tapahtuma tapahtuma, Model model) {
+	public String submitTapahtuma(@ModelAttribute Tapahtuma tapahtuma, Model model) {
 		model.addAttribute("tapahtuma", tapahtuma);
 		return "tapahtumatLista";
 	}
