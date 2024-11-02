@@ -10,10 +10,14 @@
 		<tr>
 		    <th>Tapahtuma nimi</th>
 		    <th>Paikka</th>
+			<th>Kuvaus</th>
+			<th>Päivämäärä</th>
 		</tr>  
     	<tr th:each = "tapahtuma : ${tapahtumat}">
     		<td th:text="${tapahtuma.nimi}"></td>
-    		<td th:text="${tapahtuma.sijainti}"></td>		
+    		<td th:text="${tapahtuma.sijainti}"></td>
+			<td th:text="${tapahtuma.kuvaus}"></td>	
+			<td th:text="${tapahtuma.paivamaara}"></td>			
     	</tr>
      </table>
 	 <a href="/lomake">Lisää uusi tapahtuma</a>
