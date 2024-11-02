@@ -1,9 +1,6 @@
 package loppuprojekti24.loppuprojekti.domain;
 
 import java.time.LocalDate;
-
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
