@@ -8,7 +8,7 @@ xmlns:th="http://www.thymeleaf.org">
 <body>
 	<h1>Tapahtuman tiedot</h1>
     <p th:text="'Tapahtuman nimi: ' + ${tapahtuma.nimi}" />
-    <p th:text="'Tapahtumapaikka: ' + ${tapahtuma.sijainti}" />
+    <p th:text="'Tapahtumapaikka: ' + ${tapahtuma.kaupunki.kaupunkinimi}" />
     <p th:text="'Tapahtuman kuvaus: ' + ${tapahtuma.kuvaus}" />
     <p th:text="'Päivämäärä: ' + ${tapahtuma.paivamaara}" />
     <a href="/lomake">Lisää uusi tapahtuma</a>
