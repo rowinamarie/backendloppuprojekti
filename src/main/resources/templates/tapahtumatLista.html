@@ -17,7 +17,8 @@
     		<td th:text="${tapahtuma.nimi}"></td>
     		<td th:text="${tapahtuma.sijainti}"></td>
 			<td th:text="${tapahtuma.kuvaus}"></td>	
-			<td th:text="${tapahtuma.paivamaara}"></td>			
+			<td th:text="${tapahtuma.paivamaara}"></td>
+			<td><a th:href="@{/delete/{id}(id=${tapahtuma.id})}">Delete</a></td>  			
     	</tr>
      </table>
 	 <a href="/lomake">Lisää uusi tapahtuma</a>
