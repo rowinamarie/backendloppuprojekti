@@ -12,7 +12,13 @@
         	<td>Nimi: <input type="text" th:field="*{nimi}" /></td>
         </tr>
             <tr>
-            <td>Sijainti: <input type="text" th:field="*{sijainti}" /></td>
+                <div style="clear: both; display: block; height: 10px;"></div>						
+                <label for="kaupunkilista">Kaupunki</label>
+               <select id="kaupunkilista" th:field="*{kaupunki}" class="form-control">
+                     <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiid}" th:text="${kaupunki.kaupunkinimi}"></option>
+              </select>
+              
+              <div style="clear: both; display: block; height: 10px;"></div>
         </tr>
             <tr>
             <td>Kuvaus: <input type="text" th:field="*{kuvaus}" /></td>
