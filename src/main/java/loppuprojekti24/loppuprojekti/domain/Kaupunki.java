@@ -2,6 +2,8 @@ package loppuprojekti24.loppuprojekti.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,7 +21,7 @@ public class Kaupunki {
 
     String kaupunkinimi;
 
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "kaupunki")
 	private List<Tapahtuma> tapahtumat;
 
