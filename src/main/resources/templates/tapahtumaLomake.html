@@ -5,28 +5,29 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Lisää uusi tapahtuma</h1>
+    <h1>Lisää uusi tapahtuma</h1>
     <form th:action="@{lisaa}" th:object="${tapahtuma}" method="post">
-    	<table>
-        <tr>
-        	<td>Nimi: <input type="text" th:field="*{nimi}" /></td>
-        </tr>
+        <table>
             <tr>
-                <div style="clear: both; display: block; height: 10px;"></div>						
-                <label for="kaupunkilista">Kaupunki</label>
-               <select id="kaupunkilista" th:field="*{kaupunki}" class="form-control">
-                     <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiid}" th:text="${kaupunki.kaupunkinimi}"></option>
-              </select>
-              
-              <div style="clear: both; display: block; height: 10px;"></div>
-        </tr>
+                <td>Nimi:</td>
+                <td><input type="text" th:field="*{nimi}" /></td>
+            </tr>
             <tr>
-            <td>Kuvaus: <input type="text" th:field="*{kuvaus}" /></td>
-        </tr>
-        <tr>
-            <td>Päivämäärä: <input type="date" th:field="*{paivamaara}" /></td>
-        </tr>
-        
+                <td><label for="kaupunkilista">Kaupunki:</label></td>
+                <td>
+                    <select id="kaupunkilista" th:field="*{kaupunki}" class="form-control">
+                        <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiid}" th:text="${kaupunki.kaupunkinimi}"></option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Kuvaus:</td>
+                <td><input type="text" th:field="*{kuvaus}" /></td>
+            </tr>
+            <tr>
+                <td>Päivämäärä:</td>
+                <td><input type="date" th:field="*{paivamaara}" /></td>
+            </tr>
         </table>
         <p><input type="submit" value="Tallenna" /></p>
     </form>

@@ -45,6 +45,15 @@ public class ViewTapahtumaController {
     }
 
 
+// Muokkaa yksittäistä tapahtumaa
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editTapahtuma(@PathVariable("id") Long tapahtumaId, Model model) {
+    	model.addAttribute("tapahtuma", tapahtumaRepository.findById(tapahtumaId));
+    	model.addAttribute("kaupungit", kaupunkiRepository.findAll());
+    	return "tapahtumaMuokkaa";
+    }   
+
+
 //yksittäisen tapahtuman poistaminen
  // Delete student
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
