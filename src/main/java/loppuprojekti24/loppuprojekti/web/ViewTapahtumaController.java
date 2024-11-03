@@ -1,6 +1,7 @@
 package loppuprojekti24.loppuprojekti.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,15 +21,21 @@ public class ViewTapahtumaController {
     @Autowired
     private KaupunkiRepository kaupunkiRepository;
 
-// hakee kaikki tapahtumat näkymälistauksen
-    @RequestMapping(value = {"/", "/lista"})
+    // kirjautuminen
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
+
+    // hakee kaikki tapahtumat näkymälistauksen
+    @RequestMapping(value = { "/", "/lista" })
     public String getTapahtumat(Model model) {
         model.addAttribute("tapahtumat", tapahtumaRepository.findAll());
         return "tapahtumatLista";
     }
 
-//hakee tapahtuman lisäyslomakkeen
-//GET-metodi näyttää lomakkeen luomalla uuden Tapahtuma-objektin
+    // hakee tapahtuman lisäyslomakkeen
+    // GET-metodi näyttää lomakkeen luomalla uuden Tapahtuma-objektin
     @RequestMapping(value = "/lomake")
     public String addTapahtuma(Model model) {
         model.addAttribute("tapahtuma", new Tapahtuma());
@@ -36,31 +43,30 @@ public class ViewTapahtumaController {
         return "tapahtumaLomake";
     }
 
-// tallentaa yksittaisen tapahtuman
-//POST-metodi tallentaa lomakkeen tiedot ja näyttää ne seuraavassa näkymässä.
+    // tallentaa yksittaisen tapahtuman
+    // POST-metodi tallentaa lomakkeen tiedot ja näyttää ne seuraavassa näkymässä.
     @RequestMapping(value = "/lisaa", method = RequestMethod.POST)
     public String submitTapahtuma(Tapahtuma tapahtuma) {
         tapahtumaRepository.save(tapahtuma);
         return "tapahtuma";
     }
 
-
-// Muokkaa yksittäistä tapahtumaa
+    // Muokkaa yksittäistä tapahtumaa
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String editTapahtuma(@PathVariable("id") Long tapahtumaId, Model model) {
-    	model.addAttribute("tapahtuma", tapahtumaRepository.findById(tapahtumaId));
-    	model.addAttribute("kaupungit", kaupunkiRepository.findAll());
-    	return "tapahtumaMuokkaa";
-    }   
+        model.addAttribute("tapahtuma", tapahtumaRepository.findById(tapahtumaId));
+        model.addAttribute("kaupungit", kaupunkiRepository.findAll());
+        return "tapahtumaMuokkaa";
+    }
 
-
-//yksittäisen tapahtuman poistaminen
- // Delete student
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    // yksittäisen tapahtuman poistaminen
+    // Delete student
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
     public String deleteTapahtuma(@PathVariable("id") Long tapahtumaId, Model model) {
-    	tapahtumaRepository.deleteById(tapahtumaId);
+        tapahtumaRepository.deleteById(tapahtumaId);
         return "redirect:../lista";
-    }     
+    }
 
-// viimeinen loppusulku
+    // viimeinen loppusulku
 }

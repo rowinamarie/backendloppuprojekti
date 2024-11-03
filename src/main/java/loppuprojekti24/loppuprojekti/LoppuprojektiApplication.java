@@ -7,9 +7,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.filter.HiddenHttpMethodFilter;
 
 import loppuprojekti24.loppuprojekti.domain.Kaupunki;
 import loppuprojekti24.loppuprojekti.domain.KaupunkiRepository;
+import loppuprojekti24.loppuprojekti.domain.Kayttaja;
+import loppuprojekti24.loppuprojekti.domain.KayttajaRepository;
 import loppuprojekti24.loppuprojekti.domain.Tapahtuma;
 import loppuprojekti24.loppuprojekti.domain.TapahtumaRepository;
 
@@ -23,7 +26,7 @@ public class LoppuprojektiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner tapahtumaDemo(TapahtumaRepository tapahtumaRepository, KaupunkiRepository kaupunkiRepository) {
+	public CommandLineRunner tapahtumaDemo(TapahtumaRepository tapahtumaRepository, KaupunkiRepository kaupunkiRepository, KayttajaRepository kayttajaRepository) {
 		return (args) -> {
 
 			log.info("Lisätään testikaupungit");
@@ -52,7 +55,19 @@ public class LoppuprojektiApplication {
 				log.info(tapahtuma.toString());
 			}
 
+			Kayttaja kayttaja1 = new Kayttaja ("user", "$2a$12$AoWTTdAyXOtcxJGosMvY.uik1WECxRhCcxX7J9D/oZGDiizu9Kb9W", "USER");
+			Kayttaja kayttaja2 = new Kayttaja ("admin", "$2a$12$6c0D6Qm5VHw6Ikjqx04g9eP9FG.lzbpUHKwSN.yc9NdGKkPypTiJm", "ADMIN");
+			kayttajaRepository.save(kayttaja1);
+			kayttajaRepository.save(kayttaja2);
 		};
+
+		
 	}
+	@Bean
+    public HiddenHttpMethodFilter hiddenHttpMethodFilter() {
+        return new HiddenHttpMethodFilter();
+    }
+
+
 
 }
