@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <title>Tapahtumalista</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -19,8 +19,12 @@
 			<td th:text="${tapahtuma.kuvaus}"></td>	
 			<td th:text="${tapahtuma.paivamaara}"></td>	
 			<td><a th:href="@{/edit/{id}(id=${tapahtuma.id})}">Muokkaa</a></td>    	
-			<td sec:authorize="hasRole('ADMIN')">
-			<a th:href="@{/delete/{id}(id=${tapahtuma.id})}">Poista</a></td>   		
+<td>
+				<form th:action="@{/delete/{id}(id=${tapahtuma.id})}" method="post" sec:authorize="hasAuthority('ADMIN')">
+					<input type="hidden" name="_method" value="delete" />
+					<button type="submit">Poista</button>	
+				</form>
+			</td>
     	</tr>
      </table>
 	 <a href="/lomake">Lisää uusi tapahtuma</a>
