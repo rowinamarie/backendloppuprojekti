@@ -21,6 +21,13 @@ public class ViewTapahtumaController {
     @Autowired
     private KaupunkiRepository kaupunkiRepository;
 
+
+//kirjautuminen
+    @RequestMapping(value="/login")
+    public String login() {	
+        return "login";
+    }	
+
 // hakee kaikki tapahtumat näkymälistauksen
     @RequestMapping(value = {"/", "/lista"})
     public String getTapahtumat(Model model) {
