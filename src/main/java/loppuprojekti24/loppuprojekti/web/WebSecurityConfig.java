@@ -2,9 +2,6 @@ package loppuprojekti24.loppuprojekti.web;
 
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,14 +26,24 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(antMatcher("/css/**")).permitAll() // Enable css when logged out
+                        .requestMatchers(antMatcher("/h2-console/**")).hasAuthority("ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/delete/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(formlogin -> formlogin
                         .defaultSuccessUrl("/lista", true).permitAll())
                 .logout(logout -> logout
                         .permitAll());
+
+//H2 VARTEN
+        http.csrf(csrf -> csrf.ignoringRequestMatchers(antMatcher("/h2-console/**")));
+        http.headers(headers -> headers.frameOptions().sameOrigin());
+
+        // LOPPUU TÄHÄN
+
         return http.build();
     }
+
+
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
