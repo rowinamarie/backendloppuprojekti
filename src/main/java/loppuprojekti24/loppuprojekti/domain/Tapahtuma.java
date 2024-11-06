@@ -1,36 +1,43 @@
 package loppuprojekti24.loppuprojekti.domain;
 
-import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 
 @Entity
 public class Tapahtuma {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+   @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nimi;
-    private String kuvaus;
-    private LocalDate paivamaara;
 
-    @ManyToOne
-    @JoinColumn(name = "kaupunkiid")
-    private Kaupunki kaupunki;
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JoinTable(
+        name = "tapahtuma_osallistuja",
+        joinColumns = @JoinColumn(name = "tapahtuma_id"),
+        inverseJoinColumns = @JoinColumn(name = "osallistuja_id")
+    )
 
-    public Tapahtuma() {
+    private Set<Osallistuja> osallistujat = new HashSet<>();
+//Set on Java Collections Frameworkin rajapinta, joka edustaa kokoelmaa, jossa sama alkio voi esiintyä vain kerran.
+
+    public Tapahtuma () {
     }
 
-    public Tapahtuma(String nimi, String kuvaus, LocalDate paivamaara, Kaupunki kaupunki) {
-        super();
+    public Tapahtuma(String nimi, Set<Osallistuja> osallistujat) {
+        super ();
         this.nimi = nimi;
-        this.kuvaus = kuvaus;
-        this.paivamaara = paivamaara;
-        this.kaupunki = kaupunki;
+        this.osallistujat = osallistujat;
     }
 
     public Long getId() {
@@ -49,37 +56,26 @@ public class Tapahtuma {
         this.nimi = nimi;
     }
 
-    public String getKuvaus() {
-        return kuvaus;
+    public Set<Osallistuja> getOsallistujat() {
+        return osallistujat;
     }
 
-    public void setKuvaus(String kuvaus) {
-        this.kuvaus = kuvaus;
-    }
-
-    public LocalDate getPaivamaara() {
-        return paivamaara;
-    }
-
-    public void setPaivamaara(LocalDate paivamaara) {
-        this.paivamaara = paivamaara;
-    }
-
-    public Kaupunki getKaupunki() {
-        return kaupunki;
-    }
-
-    public void setKaupunki(Kaupunki kaupunki) {
-        this.kaupunki = kaupunki;
+    public void setOsallistujat(Set<Osallistuja> osallistujat) {
+        this.osallistujat = osallistujat;
     }
 
     @Override
     public String toString() {
-        if (this.kaupunki != null) 
-            return "Tapahtuma [id=" + id + ", nimi=" + nimi + ", kuvaus=" + kuvaus + ", paivamaara=" + paivamaara
-                    + ", kaupunki=" + this.getKaupunki() + "]"; 
-        else 
-            return "Tapahtuma [id=" + id + ", nimi=" + nimi + ", kuvaus=" + kuvaus + ", paivamaara=" + paivamaara
-                    + "]";
+        return "Tapahtuma [id=" + id + ", nimi=" + nimi + ", osallistujat=" + osallistujat + "]";
     }
+
+    public void lisaaOsallistuja(Osallistuja osallistuja) {
+        if (osallistuja != null && !this.osallistujat.contains(osallistuja)) {
+            this.osallistujat.add(osallistuja);
+            osallistuja.lisaaTapahtuma(this);
+        }
+    }
+    
+ 
+ 
 }

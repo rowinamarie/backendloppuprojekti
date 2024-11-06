@@ -9,22 +9,11 @@
     <table>
 		<tr>
 		    <th>Tapahtuma nimi</th>
-		    <th>Paikka</th>
-			<th>Kuvaus</th>
-			<th>Päivämäärä</th>
+	
 		</tr>  
     	<tr th:each = "tapahtuma : ${tapahtumat}">
     		<td th:text="${tapahtuma.nimi}"></td>
-    		<td th:text="${tapahtuma.kaupunki.kaupunkinimi}"></td>
-			<td th:text="${tapahtuma.kuvaus}"></td>	
-			<td th:text="${tapahtuma.paivamaara}"></td>	
-			<td><a th:href="@{/edit/{id}(id=${tapahtuma.id})}">Muokkaa</a></td>    	
-<td>
-				<form th:action="@{/delete/{id}(id=${tapahtuma.id})}" method="post" sec:authorize="hasAuthority('ADMIN')">
-					<input type="hidden" name="_method" value="delete" />
-					<button type="submit">Poista</button>	
-				</form>
-			</td>
+			<td><a th:href="@{/edit/{id}(id=${tapahtuma.id})}">Muokkaa</a></td>    
     	</tr>
      </table>
 	 <a href="/lomake">Lisää uusi tapahtuma</a>

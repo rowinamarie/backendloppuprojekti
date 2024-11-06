@@ -13,21 +13,20 @@
                 <td><input type="text" th:field="*{nimi}" /></td>
             </tr>
             <tr>
-                <td><label for="kaupunkilista">Kaupunki:</label></td>
+                <td>Olemassa oleva osallistuja:</td>
                 <td>
-                    <select id="kaupunkilista" th:field="*{kaupunki}" class="form-control">
-                        <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiid}" th:text="${kaupunki.kaupunkinimi}"></option>
+                    <select th:field="*{osallistujat}" multiple="multiple">
+                        <option th:each="osallistuja : ${osallistujat}" 
+                                th:value="${osallistuja.id}" 
+                                th:text="${osallistuja.osallistujanimi}"></option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>Kuvaus:</td>
-                <td><input type="text" th:field="*{kuvaus}" /></td>
+                <td>Lisää uusi osallistuja:</td>
+                <td><input type="text" th:field="*{uusiOsallistuja.osallistujanimi}" /></td>
             </tr>
-            <tr>
-                <td>Päivämäärä:</td>
-                <td><input type="date" th:field="*{paivamaara}" /></td>
-            </tr>
+
         </table>
         <p><input type="submit" value="Tallenna" /></p>
     </form>
