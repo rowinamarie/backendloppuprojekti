@@ -1,4 +1,5 @@
 package loppuprojekti24.loppuprojekti;
+
 import java.time.LocalDate;
 
 import org.slf4j.Logger;
@@ -7,10 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.web.filter.HiddenHttpMethodFilter;
 
-import loppuprojekti24.loppuprojekti.domain.Tapahtuma;
-import loppuprojekti24.loppuprojekti.domain.TapahtumaRepository;
 
 @SpringBootApplication
 public class LoppuprojektiApplication {
@@ -22,14 +20,9 @@ public class LoppuprojektiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner tapahtumaDemo(TapahtumaRepository tapahtumaRepository) {
+	public CommandLineRunner tapahtumaDemo() {
 		return (args) -> {
-
 			
 		};
-
-		
 	}
-
-
 }
