@@ -1,4 +1,4 @@
-package loppuprojekti24.loppuprojekti.domain;
+/*package loppuprojekti24.loppuprojekti.domain;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -62,3 +62,4 @@ public class RetkiAktiviteetti {
     
 
 }
+ */

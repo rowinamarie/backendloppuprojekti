@@ -1,4 +1,4 @@
-package loppuprojekti24.loppuprojekti.domain;
+/*package loppuprojekti24.loppuprojekti.domain;
 
 import java.util.List;
 
@@ -10,3 +10,4 @@ public interface AktiviteettiRepository extends CrudRepository <Aktiviteetti, Lo
 
 
 }
+ */

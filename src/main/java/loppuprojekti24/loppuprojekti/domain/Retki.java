@@ -19,8 +19,8 @@ public class Retki {
     private String retkinimi;
     private String kuvaus;
 
-    @ManyToMany(mappedBy = "retket")
-    private Set<Aktiviteetti> aktiviteetit = new HashSet<>(); // estää duplikaatit
+   // @ManyToMany(mappedBy = "retket")
+    //private Set<Aktiviteetti> aktiviteetit = new HashSet<>(); // estää duplikaatit
 
     @ManyToOne
     @JoinColumn(name = "kaupunki_id")
@@ -36,11 +36,11 @@ public class Retki {
     }
 
 
-    public Retki(String retkinimi, String kuvaus, Set<Aktiviteetti> aktiviteetit, Kaupunki kaupunki,
+    public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki,
             Set<Osallistuja> osallistujat) {
         this.retkinimi = retkinimi;
         this.kuvaus = kuvaus;
-        this.aktiviteetit = aktiviteetit;
+        //this.aktiviteetit = aktiviteetit;
         this.kaupunki = kaupunki;
         this.osallistujat = osallistujat;
     }
@@ -76,14 +76,14 @@ public class Retki {
     }
 
 
-    public Set<Aktiviteetti> getAktiviteetit() {
+   /*public Set<Aktiviteetti> getAktiviteetit() {
         return aktiviteetit;
     }
 
 
     public void setAktiviteetit(Set<Aktiviteetti> aktiviteetit) {
         this.aktiviteetit = aktiviteetit;
-    }
+    }*/
 
 
     public Kaupunki getKaupunki() {
@@ -108,8 +108,7 @@ public class Retki {
 
     @Override
     public String toString() {
-        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + ", aktiviteetit="
-                + aktiviteetit + ", kaupunki=" + kaupunki + ", osallistujat=" + osallistujat + "]";
+        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + ", kaupunki=" + kaupunki + ", osallistujat=" + osallistujat + "]";
     }
 
     
