@@ -3,6 +3,7 @@ package loppuprojekti24.loppuprojekti.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Retki {
 
     @Id
@@ -26,8 +28,8 @@ public class Retki {
     @JoinColumn(name = "kaupunki_id")
     private Kaupunki kaupunki;
 
-    @OneToMany(mappedBy = "retki")
-    private Set<Osallistuja> osallistujat = new HashSet<>();
+  /*  @OneToMany(mappedBy = "retki")
+    private Set<Osallistuja> osallistujat = new HashSet<>(); */
 
 
 
@@ -36,13 +38,12 @@ public class Retki {
     }
 
 
-    public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki,
-            Set<Osallistuja> osallistujat) {
+    public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki) {
         this.retkinimi = retkinimi;
         this.kuvaus = kuvaus;
         //this.aktiviteetit = aktiviteetit;
         this.kaupunki = kaupunki;
-        this.osallistujat = osallistujat;
+      //  this.osallistujat = osallistujat;
     }
 
 
@@ -96,19 +97,19 @@ public class Retki {
     }
 
 
-    public Set<Osallistuja> getOsallistujat() {
+  /* public Set<Osallistuja> getOsallistujat() {
         return osallistujat;
     }
 
 
     public void setOsallistujat(Set<Osallistuja> osallistujat) {
         this.osallistujat = osallistujat;
-    }
+    } */
 
 
     @Override
     public String toString() {
-        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + ", kaupunki=" + kaupunki + ", osallistujat=" + osallistujat + "]";
+        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + ", kaupunki=" + kaupunki + "]";
     }
 
     

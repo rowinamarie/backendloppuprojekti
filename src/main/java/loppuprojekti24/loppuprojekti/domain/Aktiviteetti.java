@@ -14,6 +14,7 @@ import jakarta.persistence.ManyToMany;
 // Aktiviteetti-puolella käytetään @ManyToMany ja @JoinTable,
 //koska tämä puoli omistaa suhteen ja hallitsee välitaulua (kuten RetkiAktiviteetti), joka yhdistää Retki- ja Aktiviteetti-taulut.
 
+@Entity
 public class Aktiviteetti {
 
 

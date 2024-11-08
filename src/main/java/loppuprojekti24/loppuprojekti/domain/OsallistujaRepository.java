@@ -1,4 +1,4 @@
-package loppuprojekti24.loppuprojekti.domain;
+/*package loppuprojekti24.loppuprojekti.domain;
 
 import java.util.List;
 
@@ -8,4 +8,4 @@ public interface OsallistujaRepository extends CrudRepository <Osallistuja, Long
 
     List <Osallistuja> findByOsallistujanimi (String osallistujanimi);
 
-}
+} */

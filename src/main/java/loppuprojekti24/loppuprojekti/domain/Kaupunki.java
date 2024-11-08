@@ -1,13 +1,19 @@
 package loppuprojekti24.loppuprojekti.domain;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+@Entity
 public class Kaupunki {
 
     @Id
@@ -15,17 +21,18 @@ public class Kaupunki {
     private Long kaupunkiId;
     private String kaupunkinimi;
 
-    @OneToMany(mappedBy = "kaupunki")
-    private Set<Retki> retket = new HashSet<>();
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "kaupunki")
+	private List<Retki> retki;
 
 
     public Kaupunki () {
 
     }
 
-    public Kaupunki(String kaupunkinimi, Set<Retki> retket) {
+    public Kaupunki(String kaupunkinimi) {
         this.kaupunkinimi = kaupunkinimi;
-        this.retket = retket;
+      
     }
 
 
@@ -49,18 +56,9 @@ public class Kaupunki {
     }
 
 
-    public Set<Retki> getRetket() {
-        return retket;
-    }
-
-
-    public void setRetket(Set<Retki> retket) {
-        this.retket = retket;
-    }
-
     @Override
     public String toString() {
-        return "Kaupunki [kaupunkiId=" + kaupunkiId + ", kaupunkinimi=" + kaupunkinimi + ", retket=" + retket + "]";
+        return "Kaupunki [kaupunkiId=" + kaupunkiId + ", kaupunkinimi=" + kaupunkinimi +  "]";
     }
 
     
