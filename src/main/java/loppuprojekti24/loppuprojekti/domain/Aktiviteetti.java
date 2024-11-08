@@ -31,21 +31,15 @@ public class Aktiviteetti {
     )
     private Set<Retki> retket = new HashSet<>();
 
-
-
     public Aktiviteetti () {
 
     }
-
-
 
     public Aktiviteetti(String aktiviteettinimi, String kuvaus, Set<Retki> retket) {
         this.aktiviteettinimi = aktiviteettinimi;
         this.kuvaus = kuvaus;
         this.retket = retket;
     }
-
-
 
     public Long getAktiviteettiId() {
         return aktiviteettiId;
