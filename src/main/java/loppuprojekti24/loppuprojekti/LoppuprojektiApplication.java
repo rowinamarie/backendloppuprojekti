@@ -31,8 +31,12 @@ public class LoppuprojektiApplication {
 	public CommandLineRunner tapahtumaDemo(KaupunkiRepository kaupunkiRepository, RetkiRepository retkiRepository, OsallistujaRepository osallistujaRepository) {
 		return (args) -> {
 
-		     Kaupunki kaupunki1 = new Kaupunki("Saimaa");
+		Kaupunki kaupunki1 = new Kaupunki("Saimaa");
+		Kaupunki kaupunki2 = new Kaupunki("Tampere");
+		Kaupunki kaupunki3 = new Kaupunki("Turku");
         kaupunkiRepository.save(kaupunki1);
+		kaupunkiRepository.save(kaupunki2);
+		kaupunkiRepository.save(kaupunki3);
 
         // Luodaan testiretki
         Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, new HashSet<>());
