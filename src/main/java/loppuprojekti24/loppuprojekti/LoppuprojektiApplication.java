@@ -32,7 +32,7 @@ public class LoppuprojektiApplication {
 		return (args) -> {
 
 		Kaupunki kaupunki1 = new Kaupunki("Saimaa");
-		Kaupunki kaupunki2 = new Kaupunki("Tampere");
+		Kaupunki kaupunki2 = new Kaupunki("Inari");
 		Kaupunki kaupunki3 = new Kaupunki("Turku");
         kaupunkiRepository.save(kaupunki1);
 		kaupunkiRepository.save(kaupunki2);
@@ -40,7 +40,9 @@ public class LoppuprojektiApplication {
 
         // Luodaan testiretki
         Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, new HashSet<>());
+		Retki retki2 = new Retki("Ruskavaellus Lapissa", "Nukkumista tähtitaivaan alla.", kaupunki2, new HashSet<>());
         retkiRepository.save(retki1);
+        retkiRepository.save(retki2);
 
         // Luodaan osallistujat
         Osallistuja osallistuja1 = new Osallistuja("Matti", retki1);
