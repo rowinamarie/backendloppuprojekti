@@ -1,6 +1,5 @@
 package loppuprojekti24.loppuprojekti;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 
 import org.slf4j.Logger;
@@ -30,7 +29,8 @@ public class LoppuprojektiApplication {
 	@Bean
 	public CommandLineRunner tapahtumaDemo(KaupunkiRepository kaupunkiRepository, RetkiRepository retkiRepository, OsallistujaRepository osallistujaRepository) {
 		return (args) -> {
-
+			
+		log.info("Lisätään testikaupungit");
 		Kaupunki kaupunki1 = new Kaupunki("Saimaa");
 		Kaupunki kaupunki2 = new Kaupunki("Inari");
 		Kaupunki kaupunki3 = new Kaupunki("Turku");
@@ -39,12 +39,14 @@ public class LoppuprojektiApplication {
 		kaupunkiRepository.save(kaupunki3);
 
         // Luodaan testiretki
+		log.info("Lisätään testiretket");
         Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, new HashSet<>());
 		Retki retki2 = new Retki("Ruskavaellus Lapissa", "Nukkumista tähtitaivaan alla.", kaupunki2, new HashSet<>());
         retkiRepository.save(retki1);
         retkiRepository.save(retki2);
 
         // Luodaan osallistujat
+		log.info("Lisätään testiosallistujat");
         Osallistuja osallistuja1 = new Osallistuja("Matti", retki1);
         Osallistuja osallistuja2 = new Osallistuja("Liisa", retki1);
 
