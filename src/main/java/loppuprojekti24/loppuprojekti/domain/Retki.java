@@ -10,7 +10,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-//import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
@@ -23,8 +22,6 @@ public class Retki {
     private String retkinimi;
     private String kuvaus;
 
-   // @ManyToMany(mappedBy = "retket")
-    //private Set<Aktiviteetti> aktiviteetit = new HashSet<>(); // estää duplikaatit
 
     @ManyToOne
     @JoinColumn(name = "kaupunki_id")
@@ -44,7 +41,6 @@ public class Retki {
     public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki, Set <Osallistuja> osallistujat) {
         this.retkinimi = retkinimi;
         this.kuvaus = kuvaus;
-        //this.aktiviteetit = aktiviteetit;
         this.kaupunki = kaupunki;
         this.osallistujat = osallistujat;
     }
@@ -78,17 +74,6 @@ public class Retki {
     public void setKuvaus(String kuvaus) {
         this.kuvaus = kuvaus;
     }
-
-
-   /*public Set<Aktiviteetti> getAktiviteetit() {
-        return aktiviteetit;
-    }
-
-
-    public void setAktiviteetit(Set<Aktiviteetti> aktiviteetit) {
-        this.aktiviteetit = aktiviteetit;
-    }*/
-
 
     public Kaupunki getKaupunki() {
         return kaupunki;
