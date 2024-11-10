@@ -11,7 +11,7 @@
 		  	<label for="Retkinimi">Nimi</label>
 			<input type="text" id="retkinimi" th:field="*{retkinimi}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="kuvaus">kuvaus</label>
+		  	<label for="kuvaus">Kuvaus</label>
 			<input type="text" id="kuvaus" th:field="*{kuvaus}" />
               <div style="clear: both; display: block; height: 10px;"></div>						
 		  	<label for="kaupunkilista">Kaupunki</label>
@@ -19,6 +19,11 @@
        			<option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiId}" th:text="${kaupunki.kaupunkinimi}"></option>
     		</select>
 			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="retkipaivamaara">Päivämäärä</label>
+            <input type="date" id="retkipaivamaara" th:field="*{paivamaara}" class="form-control" />
+            <div style="clear: both; display: block; height: 10px;"></div>
+
 			<input type="submit" value="Tallenna"></input>
 		</form>
 	</div>
