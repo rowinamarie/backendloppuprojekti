@@ -47,10 +47,31 @@ public class ViewController {
 
     // Tallentaa retken lomakkeella
     @PostMapping("/tallennaretki")
-    public String saveForm(Retki retki) {
+    public String saveTripForm(Retki retki) {
         retkiRepository.save(retki);
         return "redirect:retket";
     }
+
+    //Näyttää retken muokkauslomakkeen
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String showEditForm(@PathVariable("id") Long retkiId, Model model) {
+        // Hae retki id:n perusteella tietokannasta
+        Retki retki = retkiRepository.findById(retkiId).orElseThrow(() -> new IllegalArgumentException("Invalid retki ID: " + retkiId));
+        model.addAttribute("retki", retki);
+        model.addAttribute("kaupungit", kaupunkiRepository.findAll());
+        return "muokkaaRetki"; // palautetaan lomake
+    }
+    
+    //Muokkaa retkeä
+    @PostMapping("/edit/{id}")
+    public String saveEditedTrip(@PathVariable("id") Long retkiId, Retki retki) {
+        retki.setRetkiId(retkiId); // Varmistetaan, että oikea id on mukana
+        retkiRepository.save(retki); // Tallennetaan muutokset
+        return "redirect:/retket"; // Siirretään takaisin retkilistalle
+    }
+    
+
+
 
     // Poistaa retken
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
