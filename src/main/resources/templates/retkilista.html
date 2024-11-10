@@ -32,7 +32,7 @@
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>  
             <td> <a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
-            <td> <a th:href="@{/osallistu}" class="btn btn-danger">Ilmoittaudu retkelle</a></td>      	       		  		
+            <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
     	</tr>
      </table>
 </body>
