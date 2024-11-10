@@ -1,5 +1,6 @@
 package loppuprojekti24.loppuprojekti;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 
 import org.slf4j.Logger;
@@ -40,8 +41,8 @@ public class LoppuprojektiApplication {
 
         // Luodaan testiretki
 		log.info("Lisätään testiretket");
-        Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, new HashSet<>());
-		Retki retki2 = new Retki("Ruskavaellus Lapissa", "Nukkumista tähtitaivaan alla.", kaupunki2, new HashSet<>());
+        Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, LocalDate.of(2024, 6, 15), new HashSet<>());
+		Retki retki2 = new Retki("Ruskavaellus Lapissa", "Nukkumista tähtitaivaan alla.", kaupunki2, LocalDate.of(2024, 9, 8), new HashSet<>());
         retkiRepository.save(retki1);
         retkiRepository.save(retki2);
 
