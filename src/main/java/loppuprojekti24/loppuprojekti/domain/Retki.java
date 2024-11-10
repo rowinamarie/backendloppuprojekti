@@ -3,6 +3,8 @@ package loppuprojekti24.loppuprojekti.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,8 +30,9 @@ public class Retki {
     @JoinColumn(name = "kaupunki_id")
     private Kaupunki kaupunki;
 
-  /*  @OneToMany(mappedBy = "retki")
-    private Set<Osallistuja> osallistujat = new HashSet<>(); */
+   @OneToMany(mappedBy = "retki")
+    @JsonManagedReference 
+    private Set<Osallistuja> osallistujat = new HashSet<>();
 
 
 
@@ -38,12 +41,12 @@ public class Retki {
     }
 
 
-    public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki) {
+    public Retki(String retkinimi, String kuvaus, Kaupunki kaupunki, Set <Osallistuja> osallistujat) {
         this.retkinimi = retkinimi;
         this.kuvaus = kuvaus;
         //this.aktiviteetit = aktiviteetit;
         this.kaupunki = kaupunki;
-      //  this.osallistujat = osallistujat;
+        this.osallistujat = osallistujat;
     }
 
 
@@ -97,14 +100,14 @@ public class Retki {
     }
 
 
-  /* public Set<Osallistuja> getOsallistujat() {
+  public Set<Osallistuja> getOsallistujat() {
         return osallistujat;
     }
 
 
     public void setOsallistujat(Set<Osallistuja> osallistujat) {
         this.osallistujat = osallistujat;
-    } */
+    } 
 
 
     @Override
