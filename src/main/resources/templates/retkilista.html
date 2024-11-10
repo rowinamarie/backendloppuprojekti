@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Studentlist</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+
+    <table class="table table-striped">
+		<tr>
+		    <th>Retken nimi</th>
+		    <th>Kuvaus</th>
+		    <th>Kaupunki</th>
+		</tr>  
+    	<tr th:each = "retki : ${retket}">
+    		<td th:text="${retki.retkinimi}"></td>
+    		<td th:text="${retki.kuvaus}"></td>
+    		<td th:text="${retki.kaupunki.kaupunkinimi}"></td> 		  		
+    	</tr>
+     </table>
+</body>
+</html>
