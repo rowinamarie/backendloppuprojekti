@@ -1,6 +1,7 @@
 package loppuprojekti24.loppuprojekti;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;	
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.Bean;
 
 import loppuprojekti24.loppuprojekti.domain.Kaupunki;
 import loppuprojekti24.loppuprojekti.domain.KaupunkiRepository;
+import loppuprojekti24.loppuprojekti.domain.Osallistuja;
+import loppuprojekti24.loppuprojekti.domain.OsallistujaRepository;
 import loppuprojekti24.loppuprojekti.domain.Retki;
 import loppuprojekti24.loppuprojekti.domain.RetkiRepository;
 
@@ -25,25 +28,22 @@ public class LoppuprojektiApplication {
 	}
 
 	@Bean
-	public CommandLineRunner tapahtumaDemo(KaupunkiRepository kaupunkiRepository, RetkiRepository retkiRepository) {
+	public CommandLineRunner tapahtumaDemo(KaupunkiRepository kaupunkiRepository, RetkiRepository retkiRepository, OsallistujaRepository osallistujaRepository) {
 		return (args) -> {
 
-			log.info("Lisätään testikaupungit");
+		     Kaupunki kaupunki1 = new Kaupunki("Saimaa");
+        kaupunkiRepository.save(kaupunki1);
 
-			Kaupunki kaupunki1 = new Kaupunki ("Saimaa");
-			Kaupunki kaupunki2 = new Kaupunki ("Inari");
-			Kaupunki kaupunki3 = new Kaupunki ("Turku");
+        // Luodaan testiretki
+        Retki retki1 = new Retki("Kesäretki Saimaalle", "Kolmen päivän retki.", kaupunki1, new HashSet<>());
+        retkiRepository.save(retki1);
 
-			kaupunkiRepository.save(kaupunki1);
-			kaupunkiRepository.save(kaupunki2);
-			kaupunkiRepository.save(kaupunki3);
+        // Luodaan osallistujat
+        Osallistuja osallistuja1 = new Osallistuja("Matti", retki1);
+        Osallistuja osallistuja2 = new Osallistuja("Liisa", retki1);
 
-
-			log.info("Lisätään testitapahtumia");
-			retkiRepository.save(new Retki( "Kesäretki Saimaalle", "Kolmen päivän retki kauniilla Saimaan vesistöalueella. Ohjelmassa melontaa, kalastusta ja yöpymistä teltoissa.", kaupunki1 ));
-			retkiRepository.save(new Retki("Vaellus Lapin tuntureilla", "Viiden päivän vaellus läpi upeiden Lapin tunturimaisemien. Matkalla yövytään laavuilla ja ihastellaan revontulia." , kaupunki2));	
-			retkiRepository.save(new Retki("Melonta ja saaristoretki", "Kolmen päivän melontaretki saaristossa, jossa tutustutaan useisiin saariin ja maistellaan paikallisia herkkuja.", kaupunki3));
-			
+        osallistujaRepository.save(osallistuja1);
+        osallistujaRepository.save(osallistuja2);
 		};
 	}
 }
