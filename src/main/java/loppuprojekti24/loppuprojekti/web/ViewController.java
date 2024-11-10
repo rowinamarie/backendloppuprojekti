@@ -56,7 +56,7 @@ public class ViewController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteTrip(@PathVariable("id") Long retkiId, Model model) {
         retkiRepository.deleteById(retkiId);
-        return "redirect:retket";
+        return "redirect:../retket";
     }
 
 
