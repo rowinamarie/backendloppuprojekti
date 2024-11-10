@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Osallistumislomake</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Ilmoittaudu retkelle</h1>
+	<div>
+		<form th:object="${osallistuja}" th:action="@{/tallennaosallistuja}" action="#" method="post">
+		  	<label for="etunimi">Etunimi</label>
+			<input type="text" id="etunimi" th:field="*{etunimi}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		  	<label for="retkilista">Valtise retki</label>
+			 <select id="retkilista" th:field="*{retki}" class="form-control">
+       			<option th:each="retki: ${retket}" th:value="${retki.retkiId}" th:text="${retki.retkinimi}"></option>
+    		</select>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Tallenna"></input>
+		</form>
+	</div>
+</body>
+</html>
