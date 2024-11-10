@@ -7,7 +7,7 @@
 
     <style>
         table {
-            width: 50%;
+            width: 60%;
         }
         th, td {
             text-align: left; /* Tämä tasaa kaiken tekstin vasemmalle */
@@ -21,8 +21,8 @@
 		    <th>Retken nimi</th>
 		    <th>Kuvaus</th>
 		    <th>Kaupunki</th>
-            <th>Osallistujat</th>
             <th>Päivämäärä</th>
+            <th>Osallistujat</th>
 		</tr>  
     	<tr th:each = "retki : ${retket}">
     		<td th:text="${retki.retkinimi}"></td>
@@ -34,6 +34,7 @@
                 <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>  
+            <td> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
             <td> <a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
             <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
     	</tr>
