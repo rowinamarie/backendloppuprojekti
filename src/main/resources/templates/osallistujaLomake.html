@@ -12,7 +12,7 @@
 			<input type="text" id="etunimi" th:field="*{etunimi}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 
-		  	<label for="retkilista">Valtise retki</label>
+		  	<label for="retkilista">Valitse retki</label>
 			 <select id="retkilista" th:field="*{retki}" class="form-control">
        			<option th:each="retki: ${retket}" th:value="${retki.retkiId}" th:text="${retki.retkinimi}"></option>
     		</select>
