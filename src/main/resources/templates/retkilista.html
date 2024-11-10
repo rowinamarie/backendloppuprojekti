@@ -22,11 +22,14 @@
 		    <th>Kuvaus</th>
 		    <th>Kaupunki</th>
             <th>Osallistujat</th>
+            <th>Päivämäärä</th>
 		</tr>  
     	<tr th:each = "retki : ${retket}">
     		<td th:text="${retki.retkinimi}"></td>
     		<td th:text="${retki.kuvaus}"></td>
     		<td th:text="${retki.kaupunki.kaupunkinimi}"></td>
+            <td th:text="${retki.paivamaara}"></td>
+
             <td>
                 <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
