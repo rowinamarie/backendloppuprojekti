@@ -22,7 +22,11 @@
            </select>
         </div>
         <div>
-            <label for="pvm">Päivämäärä:</label>
+            <label for="alkupvm">Alkuperäinen päivämäärä:  <span th:text="${retki.paivamaara}"></span></label>
+        </div>
+        
+        <div>
+            <label for="pvm">Uusi päivämäärä:</label>
             <input type="date" th:field="*{paivamaara}" />
         </div>
         <div>
