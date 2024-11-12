@@ -50,6 +50,14 @@ public class ViewController {
         return "lisaaRetki";
     }
 
+    @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    public String showTrip(@PathVariable("id") Long retkiId, Model model) {
+        Retki retki = retkiRepository.findById(retkiId)
+                .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
+        model.addAttribute("retki", retki); // Lisätään yksittäinen retki malliin
+        return "retkenTiedot"; // Tämä on HTML-sivun nimi (esim. retkenTiedot.html)
+    }
+
     // Tallentaa retken lomakkeella
     @PostMapping("/tallennaretki")
     public String saveTripForm(Retki retki) {
@@ -57,33 +65,37 @@ public class ViewController {
         return "redirect:retket";
     }
 
-    //Näyttää retken muokkauslomakkeen
+    // Näyttää retken muokkauslomakkeen
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
     public String showEditForm(@PathVariable("id") Long retkiId, Model model) {
         // Hae retki id:n perusteella tietokannasta
-        Retki retki = retkiRepository.findById(retkiId).orElseThrow(() -> new IllegalArgumentException("Invalid retki ID: " + retkiId));
+        Retki retki = retkiRepository.findById(retkiId)
+                .orElseThrow(() -> new IllegalArgumentException("Invalid retki ID: " + retkiId));
         model.addAttribute("retki", retki);
         model.addAttribute("kaupungit", kaupunkiRepository.findAll());
         return "muokkaaRetki"; // palautetaan lomake
     }
-    
-    //Muokkaa retkeä
-@PutMapping("/edit/{id}")
-public ResponseEntity<Retki> updateRetki(@PathVariable Long id, @ModelAttribute Retki updatedRetki) {
-    Retki existingRetki = retkiRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
 
-    // Päivitä vain tarvittavat kentät
-    existingRetki.setRetkinimi(updatedRetki.getRetkinimi());
-    existingRetki.setKuvaus(updatedRetki.getKuvaus());
-    existingRetki.setPaivamaara(updatedRetki.getPaivamaara());
+    // Muokkaa retkeä
+    @PutMapping("/edit/{id}")
+    public String updateRetki(@PathVariable Long id, @ModelAttribute Retki updatedRetki, Model model) {
+        Retki existingRetki = retkiRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
 
-    // Tärkeää: Älä korvaa osallistujia, ellet halua nimenomaan päivittää niitä
-    // existingRetki.setOsallistujat(updatedRetki.getOsallistujat()); // Kommentoi tämä pois, jos osallistujia ei pidä muuttaa
+        // Päivietään vain tarvittavat kentät
+        existingRetki.setRetkinimi(updatedRetki.getRetkinimi());
+        existingRetki.setKuvaus(updatedRetki.getKuvaus());
+        existingRetki.setPaivamaara(updatedRetki.getPaivamaara());
 
-    retkiRepository.save(existingRetki);
-    return ResponseEntity.ok(existingRetki);
-}
+        // osallistujat pysyvät sellaisinaan
+        retkiRepository.save(existingRetki);
 
+        // Siirretään päivitetty retki malliin
+        model.addAttribute("retki", existingRetki);
+
+        // Ohjataan näyttämään retken tiedot
+        return "retkenTiedot";
+    }
 
     // Poistaa retken
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
@@ -91,7 +103,6 @@ public ResponseEntity<Retki> updateRetki(@PathVariable Long id, @ModelAttribute 
         retkiRepository.deleteById(retkiId);
         return "redirect:../retket";
     }
-
 
     // OSALLISTUJAN NÄKYMÄT
 
@@ -103,14 +114,12 @@ public ResponseEntity<Retki> updateRetki(@PathVariable Long id, @ModelAttribute 
         return "osallistujaLomake";
     }
 
-     // Tallentaa osallistujalomakkeen
-     @PostMapping("/tallennaosallistuja")
-     public String saveOsallistuja(Osallistuja osallistuja) {
-         osallistujaRepository.save(osallistuja);
-         return "redirect:retket";
-     }
-
-     
+    // Tallentaa osallistujalomakkeen
+    @PostMapping("/tallennaosallistuja")
+    public String saveOsallistuja(Osallistuja osallistuja) {
+        osallistujaRepository.save(osallistuja);
+        return "redirect:retket";
+    }
 
     // viimeinen sulku
 }
