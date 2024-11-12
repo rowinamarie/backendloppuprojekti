@@ -6,6 +6,7 @@
 <body>
     <h1>Muokkaa retkeä</h1>
     <form th:action="@{/edit/{id}(id=${retki.retkiId})}" th:object="${retki}" method="post">
+        <input type="hidden" name="_method" value="put" />
         <div>
             <label for="retkinimi">Retken nimi:</label>
             <input type="text" id="retkinimi" th:field="*{retkinimi}" />
