@@ -37,7 +37,7 @@ public class ViewController {
 
     // Hakee view -näkymän kaikista retkistä
     @RequestMapping(value = { "/", "/retket" })
-    public String studentList(Model model) {
+    public String showAllTrips(Model model) {
         model.addAttribute("retket", retkiRepository.findAll());
         return "retkilista";
     }
@@ -50,6 +50,7 @@ public class ViewController {
         return "lisaaRetki";
     }
 
+    // näyttää yksittäisen retken tiedot
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
     public String showTrip(@PathVariable("id") Long retkiId, Model model) {
         Retki retki = retkiRepository.findById(retkiId)
@@ -62,7 +63,7 @@ public class ViewController {
     @PostMapping("/tallennaretki")
     public String saveTripForm(Retki retki) {
         retkiRepository.save(retki);
-        return "redirect:retket";
+        return "retkenTiedot";
     }
 
     // Näyttää retken muokkauslomakkeen
@@ -71,6 +72,9 @@ public class ViewController {
         // Hae retki id:n perusteella tietokannasta
         Retki retki = retkiRepository.findById(retkiId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid retki ID: " + retkiId));
+
+        System.out.println("Paivamaara: " + retki.getPaivamaara());
+        
         model.addAttribute("retki", retki);
         model.addAttribute("kaupungit", kaupunkiRepository.findAll());
         return "muokkaaRetki"; // palautetaan lomake
@@ -121,5 +125,18 @@ public class ViewController {
         return "redirect:retket";
     }
 
+    // näyttää yhden retken kaikki osallistujat
+    @RequestMapping(value = "/osallistujat/{id}")
+    public String showParticipants(@PathVariable("id") Long retkiId, Model model) {
+        // Etsi retki ID:n perusteella
+        Retki retki = retkiRepository.findById(retkiId)
+                .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
+
+        // Lisää retki ja sen osallistujat malliin
+        model.addAttribute("retki", retki);
+
+        // Palauta oikea näkymä
+        return "naytaOsallistujat"; // HTML-sivun nimi
+    }
     // viimeinen sulku
 }
