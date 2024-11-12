@@ -48,8 +48,8 @@ public class LoppuprojektiApplication {
 
         // Luodaan osallistujat
 		log.info("Lisätään testiosallistujat");
-        Osallistuja osallistuja1 = new Osallistuja("Matti", retki1);
-        Osallistuja osallistuja2 = new Osallistuja("Liisa", retki1);
+        Osallistuja osallistuja1 = new Osallistuja("Matti", "Meikaläinen", "matti.meikalainen@sahkoposti.fi", retki1);
+        Osallistuja osallistuja2 = new Osallistuja("Liisa", "Korhonen", "liisa@sahkposti.fi", retki2);
 
 		retki1.getOsallistujat().add(osallistuja1);
 		retki1.getOsallistujat().add(osallistuja2);
