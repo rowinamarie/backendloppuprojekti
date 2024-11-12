@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <title>Osallistujalista</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+    <h1>Retken <span th:text="${retki.retkinimi}"></span> osallistujat</h1>
+    <table class="table table-striped">
+        <tr>
+            <th>Retken nimi:</th>
+            <td th:text="${retki.retkinimi}"></td>
+        </tr>
+       
+                <table class="table table-striped">
+                    <tr>
+                        <th>Etunimi</th>
+                        <th>Sukunimi</th>
+                        <th>Sähköposti</th>
+                    </tr>
+                    <tr th:each="osallistuja : ${retki.osallistujat}">
+                        <td th:text="${osallistuja.etunimi}"></td>
+                        <td th:text="${osallistuja.sukunimi}"></td>
+                        <td th:text="${osallistuja.sahkoposti}"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <a th:href="@{/retket}" class="btn btn-secondary">Takaisin retkien listaan</a>
+</body>
+</html>
