@@ -34,6 +34,7 @@
                 <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>  
+            <td> <a th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a></td> 
             <td> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
             <td> <a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
             <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
