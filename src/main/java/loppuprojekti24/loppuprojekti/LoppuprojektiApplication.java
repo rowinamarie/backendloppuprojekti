@@ -51,8 +51,14 @@ public class LoppuprojektiApplication {
         Osallistuja osallistuja1 = new Osallistuja("Matti", retki1);
         Osallistuja osallistuja2 = new Osallistuja("Liisa", retki1);
 
+		retki1.getOsallistujat().add(osallistuja1);
+		retki1.getOsallistujat().add(osallistuja2);
+
         osallistujaRepository.save(osallistuja1);
         osallistujaRepository.save(osallistuja2);
+		
+
+
 		};
 	}
 }
