@@ -35,11 +35,11 @@
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>  
             <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a></td> 
-            <td sec:authorize="hasRole('ADMIN')"><td> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
-            <td sec:authorize="hasRole('ADMIN')"><td> <a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
+            <td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
+            <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
             <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
     	</tr>
      </table>
-     <a th:href="@{/lisaa}" class="btn btn-danger">Lisää uusi tapahtuma</a>
+     <a th:href="@{/lisaa}" class="btn btn-danger" sec:authorize="hasRole('ADMIN')">Lisää uusi tapahtuma</a>
 </body>
 </html>
