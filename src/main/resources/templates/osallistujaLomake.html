@@ -10,6 +10,10 @@
 		<form th:object="${osallistuja}" th:action="@{/tallennaosallistuja}" action="#" method="post">
 		  	<label for="etunimi">Etunimi</label>
 			<input type="text" id="etunimi" th:field="*{etunimi}" />
+			<label for="sukunimi">Sukunimi</label>
+			<input type="text" id="sukunimi" th:field="*{sukunimi}" />
+			<label for="sahkoposti">Sahkoposti</label>
+			<input type="text" id="sahkoposti" th:field="*{sahkoposti}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 
 		  	<label for="retkilista">Valitse retki</label>
