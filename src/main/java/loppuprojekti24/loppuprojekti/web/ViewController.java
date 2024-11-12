@@ -1,11 +1,16 @@
 package loppuprojekti24.loppuprojekti.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.http.ResponseEntity;
 // Import required classes and packages
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -63,14 +68,21 @@ public class ViewController {
     }
     
     //Muokkaa retkeä
-    @PostMapping("/edit/{id}")
-    public String saveEditedTrip(@PathVariable("id") Long retkiId, Retki retki) {
-        retki.setRetkiId(retkiId); // Varmistetaan, että oikea id on mukana
-        retkiRepository.save(retki); // Tallennetaan muutokset
-        return "redirect:/retket"; // Siirretään takaisin retkilistalle
-    }
-    
+@PutMapping("/edit/{id}")
+public ResponseEntity<Retki> updateRetki(@PathVariable Long id, @ModelAttribute Retki updatedRetki) {
+    Retki existingRetki = retkiRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
 
+    // Päivitä vain tarvittavat kentät
+    existingRetki.setRetkinimi(updatedRetki.getRetkinimi());
+    existingRetki.setKuvaus(updatedRetki.getKuvaus());
+    existingRetki.setPaivamaara(updatedRetki.getPaivamaara());
+
+    // Tärkeää: Älä korvaa osallistujia, ellet halua nimenomaan päivittää niitä
+    // existingRetki.setOsallistujat(updatedRetki.getOsallistujat()); // Kommentoi tämä pois, jos osallistujia ei pidä muuttaa
+
+    retkiRepository.save(existingRetki);
+    return ResponseEntity.ok(existingRetki);
+}
 
 
     // Poistaa retken
