@@ -2,6 +2,7 @@ package loppuprojekti24.loppuprojekti.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 // Import required classes and packages
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,24 +49,28 @@ public class ViewController {
         return "lisaaRetki";
     }
 
+     // Tallentaa retken lomakkeella
+     @PostMapping("/tallennaretki")
+     @PreAuthorize("hasRole('ADMIN')")
+     public String saveTripForm(Retki retki) {
+         retkiRepository.save(retki);
+         return "retkenTiedot";
+     }
+
     // näyttää yksittäisen retken tiedot
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
     public String showTrip(@PathVariable("id") Long retkiId, Model model) {
         Retki retki = retkiRepository.findById(retkiId)
                 .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
         model.addAttribute("retki", retki); // Lisätään yksittäinen retki malliin
         return "retkenTiedot"; // Tämä on HTML-sivun nimi (esim. retkenTiedot.html)
     }
-
-    // Tallentaa retken lomakkeella
-    @PostMapping("/tallennaretki")
-    public String saveTripForm(Retki retki) {
-        retkiRepository.save(retki);
-        return "retkenTiedot";
-    }
+   
 
     // Näyttää retken muokkauslomakkeen
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
     public String showEditForm(@PathVariable("id") Long retkiId, Model model) {
         // Hae retki id:n perusteella tietokannasta
         Retki retki = retkiRepository.findById(retkiId)
@@ -78,8 +83,9 @@ public class ViewController {
         return "muokkaaRetki"; // palautetaan lomake
     }
 
-    // Muokkaa retkeä
+    // Tallentaa muokatun retket
     @PutMapping("/edit/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String updateRetki(@PathVariable Long id, @ModelAttribute Retki updatedRetki, Model model) {
         Retki existingRetki = retkiRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
@@ -101,6 +107,7 @@ public class ViewController {
 
     // Poistaa retken
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @PreAuthorize("hasRole('ADMIN')")
     public String deleteTrip(@PathVariable("id") Long retkiId, Model model) {
         retkiRepository.deleteById(retkiId);
         return "redirect:../retket";
@@ -125,6 +132,7 @@ public class ViewController {
 
     // näyttää yhden retken kaikki osallistujat
     @RequestMapping(value = "/osallistujat/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public String showParticipants(@PathVariable("id") Long retkiId, Model model) {
         // Etsi retki ID:n perusteella
         Retki retki = retkiRepository.findById(retkiId)
