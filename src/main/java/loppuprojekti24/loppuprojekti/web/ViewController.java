@@ -72,7 +72,7 @@ public class ViewController {
                 .orElseThrow(() -> new IllegalArgumentException("Invalid retki ID: " + retkiId));
 
         System.out.println("Paivamaara: " + retki.getPaivamaara());
-        
+
         model.addAttribute("retki", retki);
         model.addAttribute("kaupungit", kaupunkiRepository.findAll());
         return "muokkaaRetki"; // palautetaan lomake
@@ -136,5 +136,11 @@ public class ViewController {
         // Palauta oikea näkymä
         return "naytaOsallistujat"; // HTML-sivun nimi
     }
+
+    @RequestMapping(value="/login")
+	public String login() {
+		return "login";
+	}    
+
     // viimeinen sulku
 }
