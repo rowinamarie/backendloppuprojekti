@@ -17,8 +17,8 @@ public class Osallistuja {
     private Long osallistujaId;
 
     private String etunimi;
-    // private String sukunimi;
-    // private String sahkoposti;
+    private String sukunimi;
+    private String sahkoposti;
 
     @ManyToOne
     @JoinColumn(name = "retki_id") // Viittaa retkeen
@@ -29,10 +29,10 @@ public class Osallistuja {
 
     }
 
-    public Osallistuja(String etunimi, Retki retki) {
+    public Osallistuja(String etunimi,String sukunimi, String sahkoposti, Retki retki) {
         this.etunimi = etunimi;
-        // this.sukunimi = sukunimi;
-        // this.sahkoposti = sahkoposti;
+        this.sukunimi = sukunimi;
+        this.sahkoposti = sahkoposti;
         this.retki = retki;
     }
 
@@ -52,23 +52,21 @@ public class Osallistuja {
         this.etunimi = etunimi;
     }
 
-    /*
-     * public String getSukunimi() {
-     * return sukunimi;
-     * }
-     * 
-     * public void setSukunimi(String sukunimi) {
-     * this.sukunimi = sukunimi;
-     * }
-     * 
-     * public String getSahkoposti() {
-     * return sahkoposti;
-     * }
-     * 
-     * public void setSahkoposti(String sahkoposti) {
-     * this.sahkoposti = sahkoposti;
-     * }
-     */
+    public String getSukunimi() {
+        return sukunimi;
+    }
+
+    public void setSukunimi(String sukunimi) {
+        this.sukunimi = sukunimi;
+    }
+
+    public String getSahkoposti() {
+        return sahkoposti;
+    }
+
+    public void setSahkoposti(String sahkoposti) {
+        this.sahkoposti = sahkoposti;
+    }
 
     public Retki getRetki() {
         return retki;
@@ -80,7 +78,9 @@ public class Osallistuja {
 
     @Override
     public String toString() {
-        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi + ", retki=" + retki + "]";
+        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
+                + ", sahkoposti=" + sahkoposti + ", retki=" + retki + "]";
     }
+
 
 }
