@@ -97,10 +97,11 @@ public class Retki {
 
     @Override
     public String toString() {
-        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + ", paivamaara="
-                + paivamaara + ", kaupunki=" + kaupunki + ", osallistujat=" + osallistujat + "]";
+        return "Retki [retkiId=" + retkiId + ", retkinimi=" + retkinimi + ", kuvaus=" + kuvaus + 
+                ", paivamaara=" + paivamaara + ", kaupunki=" + (kaupunki != null ? kaupunki.getKaupunkinimi() : "null") + 
+                ", osallistujatCount=" + (osallistujat != null ? osallistujat.size() : 0) + "]";
     }
-
+    
 
     
 

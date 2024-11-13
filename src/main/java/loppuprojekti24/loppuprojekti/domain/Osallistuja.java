@@ -8,6 +8,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Osallistuja {
@@ -16,8 +17,11 @@ public class Osallistuja {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long osallistujaId;
 
+    @NotEmpty (message = "Etunimi on pakollinen")
     private String etunimi;
+    @NotEmpty (message = "Sukunimi on pakollinen")
     private String sukunimi;
+    @NotEmpty (message = "Sähköposti on pakollinen")
     private String sahkoposti;
 
     @ManyToOne
@@ -78,9 +82,11 @@ public class Osallistuja {
 
     @Override
     public String toString() {
-        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi + ", sukunimi=" + sukunimi
-                + ", sahkoposti=" + sahkoposti + ", retki=" + retki + "]";
+        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi + 
+                ", sukunimi=" + sukunimi + ", sahkoposti=" + sahkoposti + 
+                ", retkiId=" + (retki != null ? retki.getRetkiId() : "null") + "]";
     }
+    
 
 
 }
