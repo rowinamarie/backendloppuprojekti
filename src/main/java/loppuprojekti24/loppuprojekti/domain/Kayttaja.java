@@ -14,11 +14,11 @@ public class Kayttaja {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "username", nullable = false, unique = true)
-    private String username;
+    @Column(name = "kayttajatunnus", nullable = false, unique = true)
+    private String kayttajatunnus;
 
-    @Column(name = "password", nullable = false)
-    private String passwordHash;
+    @Column(name = "salasana", nullable = false)
+    private String salasanaHash;
 
     @Column(name = "role", nullable = false)
     private String role;
@@ -29,10 +29,10 @@ public class Kayttaja {
     }
 
 
-    public Kayttaja(String username, String passwordHash, String role) {
+    public Kayttaja(String kayttajatunnus, String salasanaHash, String role) {
         super();
-        this.username = username;
-        this.passwordHash = passwordHash;
+        this.kayttajatunnus = kayttajatunnus;
+        this.salasanaHash = salasanaHash;
         this.role = role;
     }
 
@@ -47,23 +47,23 @@ public class Kayttaja {
     }
 
 
-    public String getUsername() {
-        return username;
+    public String getKayttajatunnus() {
+        return kayttajatunnus;
     }
 
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setKayttajatunnus(String kayttajatunnus) {
+        this.kayttajatunnus = kayttajatunnus;
     }
 
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getSalasanaHash() {
+        return salasanaHash;
     }
 
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setSalasanaHash(String salasanaHash) {
+        this.salasanaHash = salasanaHash;
     }
 
 
@@ -79,4 +79,7 @@ public class Kayttaja {
     
 
     
+
+
+
 }
