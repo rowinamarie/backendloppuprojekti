@@ -9,7 +9,10 @@
 	<div>
 		<form th:object="${retki}" th:action="@{/tallennaretki}" action="#" method="post">
 		  	<label for="Retkinimi">Nimi</label>
-			<input type="text" id="retkinimi" th:field="*{retkinimi}" />
+			  <input type="text" id="retkinimi" th:field="*{retkinimi}" />
+			  <!-- Näytetään virheilmoitus, jos kentässä on virhe -->
+			  <div th:if="${#fields.hasErrors('retkinimi')}" th:errors="*{retkinimi}">Error</div>
+  
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="kuvaus">Kuvaus</label>
 			<input type="text" id="kuvaus" th:field="*{kuvaus}" />

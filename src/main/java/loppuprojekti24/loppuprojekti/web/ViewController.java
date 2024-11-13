@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 // Import required classes and packages
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import jakarta.validation.Valid;
 import loppuprojekti24.loppuprojekti.domain.KaupunkiRepository;
 import loppuprojekti24.loppuprojekti.domain.Osallistuja;
 import loppuprojekti24.loppuprojekti.domain.OsallistujaRepository;
@@ -49,13 +51,20 @@ public class ViewController {
         return "lisaaRetki";
     }
 
-     // Tallentaa retken lomakkeella
-     @PostMapping("/tallennaretki")
-     @PreAuthorize("hasAuthority('OPETTAJA')")
-     public String saveTripForm(Retki retki) {
-         retkiRepository.save(retki);
-         return "retkenTiedot";
-     }
+    // Tallentaa retken lomakkeella
+    @PostMapping("/tallennaretki")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
+    public String saveTripForm(@Valid Retki retki, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+        model.addAttribute("kaupungit", kaupunkiRepository.findAll());
+           System.out.println("Error errors" + retki);
+           return "lisaaRetki";
+            
+        }
+
+        retkiRepository.save(retki);
+        return "retkenTiedot";
+    }
 
     // näyttää yksittäisen retken tiedot
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
@@ -66,7 +75,6 @@ public class ViewController {
         model.addAttribute("retki", retki); // Lisätään yksittäinen retki malliin
         return "retkenTiedot"; // Tämä on HTML-sivun nimi (esim. retkenTiedot.html)
     }
-   
 
     // Näyttää retken muokkauslomakkeen
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -145,10 +153,10 @@ public class ViewController {
         return "naytaOsallistujat"; // HTML-sivun nimi
     }
 
-    @RequestMapping(value="/login")
-	public String login() {
-		return "login";
-	}    
+    @RequestMapping(value = "/login")
+    public String login() {
+        return "login";
+    }
 
     // viimeinen sulku
 }
