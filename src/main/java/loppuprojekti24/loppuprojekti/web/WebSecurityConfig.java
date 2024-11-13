@@ -1,8 +1,5 @@
 package loppuprojekti24.loppuprojekti.web;
 
-import java.util.ArrayList;
-import java.util.List;
-
 //antMatcherin importointi
 import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
 
