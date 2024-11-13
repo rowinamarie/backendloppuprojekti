@@ -1,5 +1,10 @@
 package loppuprojekti24.loppuprojekti.domain;
 
-public class KayttajaRepository {
+import org.springframework.data.repository.CrudRepository;
+
+
+public interface KayttajaRepository extends CrudRepository <Kayttaja, Long> {
+
+Kayttaja findByKayttajatunnus (String kayttajatunnus); 
 
 }
