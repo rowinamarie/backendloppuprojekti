@@ -56,10 +56,10 @@ public class ViewController {
     @PreAuthorize("hasAuthority('OPETTAJA')")
     public String saveTripForm(@Valid Retki retki, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
-        model.addAttribute("kaupungit", kaupunkiRepository.findAll());
-           System.out.println("Error errors" + retki);
-           return "lisaaRetki";
-            
+            model.addAttribute("kaupungit", kaupunkiRepository.findAll());
+            System.out.println("Error errors" + retki);
+            return "lisaaRetki";
+
         }
 
         retkiRepository.save(retki);
@@ -133,7 +133,15 @@ public class ViewController {
 
     // Tallentaa osallistujalomakkeen
     @PostMapping("/tallennaosallistuja")
-    public String saveOsallistuja(Osallistuja osallistuja) {
+    public String saveOsallistuja(@Valid Osallistuja osallistuja, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("Virheellinen osallistuja: " + osallistuja);
+
+            // Palautetaan lomake virheilmoituksilla
+            model.addAttribute("retket", retkiRepository.findAll());
+
+            return "osallistujaLomake";
+        }
         osallistujaRepository.save(osallistuja);
         return "redirect:retket";
     }

@@ -10,10 +10,16 @@
 		<form th:object="${osallistuja}" th:action="@{/tallennaosallistuja}" action="#" method="post">
 		  	<label for="etunimi">Etunimi</label>
 			<input type="text" id="etunimi" th:field="*{etunimi}" />
+			<div th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}">Error</div>
+
 			<label for="sukunimi">Sukunimi</label>
 			<input type="text" id="sukunimi" th:field="*{sukunimi}" />
+			<div th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}">Error</div>
+
 			<label for="sahkoposti">Sahkoposti</label>
 			<input type="text" id="sahkoposti" th:field="*{sahkoposti}" />
+			<div th:if="${#fields.hasErrors('sahkoposti')}" th:errors="*{sahkoposti}">Error</div>
+			
 			<div style="clear: both; display: block; height: 10px;"></div>
 
 		  	<label for="retkilista">Valitse retki</label>
