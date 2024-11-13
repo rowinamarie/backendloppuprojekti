@@ -16,6 +16,12 @@
 </head>
 <body>
 
+    <div sec:authorize="isAuthenticated()">
+        Kirjautunut käyttäjä: <span sec:authentication="name"></span>
+        <br />
+        Roolit: <span sec:authentication="authorities"></span>
+    </div>
+
     <table class="table table-striped">
 		<tr>
 		    <th>Retken nimi</th>
@@ -34,12 +40,12 @@
                 <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
                       th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>  
-            <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a></td> 
-            <td sec:authorize="hasRole('ADMIN')"> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
-            <td sec:authorize="hasRole('ADMIN')"><a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
+            <td sec:authorize="hasAuthority('OPETTAJA')"><a th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a></td> 
+            <td sec:authorize="hasAuthority('OPETTAJA')"> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
+            <td sec:authorize="hasAuthority('OPETTAJA')"><a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
             <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
     	</tr>
      </table>
-     <a th:href="@{/lisaa}" class="btn btn-danger" sec:authorize="hasRole('ADMIN')">Lisää uusi tapahtuma</a>
+     <a th:href="@{/lisaa}" class="btn btn-danger" sec:authorize="hasAuthority('OPETTAJA')">Lisää uusi tapahtuma</a>
 </body>
 </html>
