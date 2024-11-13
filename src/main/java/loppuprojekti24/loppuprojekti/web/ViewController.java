@@ -51,7 +51,7 @@ public class ViewController {
 
      // Tallentaa retken lomakkeella
      @PostMapping("/tallennaretki")
-     @PreAuthorize("hasRole('ADMIN')")
+     @PreAuthorize("hasAuthority('OPETTAJA')")
      public String saveTripForm(Retki retki) {
          retkiRepository.save(retki);
          return "retkenTiedot";
@@ -59,7 +59,7 @@ public class ViewController {
 
     // näyttää yksittäisen retken tiedot
     @RequestMapping(value = "/show/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
     public String showTrip(@PathVariable("id") Long retkiId, Model model) {
         Retki retki = retkiRepository.findById(retkiId)
                 .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
@@ -70,7 +70,7 @@ public class ViewController {
 
     // Näyttää retken muokkauslomakkeen
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
     public String showEditForm(@PathVariable("id") Long retkiId, Model model) {
         // Hae retki id:n perusteella tietokannasta
         Retki retki = retkiRepository.findById(retkiId)
@@ -85,7 +85,7 @@ public class ViewController {
 
     // Tallentaa muokatun retket
     @PutMapping("/edit/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
     public String updateRetki(@PathVariable Long id, @ModelAttribute Retki updatedRetki, Model model) {
         Retki existingRetki = retkiRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Retki not found"));
@@ -107,7 +107,7 @@ public class ViewController {
 
     // Poistaa retken
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
     public String deleteTrip(@PathVariable("id") Long retkiId, Model model) {
         retkiRepository.deleteById(retkiId);
         return "redirect:../retket";
@@ -132,7 +132,7 @@ public class ViewController {
 
     // näyttää yhden retken kaikki osallistujat
     @RequestMapping(value = "/osallistujat/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAuthority('OPETTAJA')")
     public String showParticipants(@PathVariable("id") Long retkiId, Model model) {
         // Etsi retki ID:n perusteella
         Retki retki = retkiRepository.findById(retkiId)
