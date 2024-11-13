@@ -18,8 +18,6 @@
 
     <div sec:authorize="isAuthenticated()">
         Kirjautunut käyttäjä: <span sec:authentication="name"></span>
-        <br />
-        Roolit: <span sec:authentication="authorities"></span>
     </div>
 
     <table class="table table-striped">
