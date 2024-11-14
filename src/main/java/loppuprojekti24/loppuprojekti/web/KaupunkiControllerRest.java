@@ -18,7 +18,7 @@ public class KaupunkiControllerRest {
     private KaupunkiRepository kaupunkiRepository;
 
 
-       // GET endpoint kaupungin hakemiseen
+    // GET endpoint kaupungin hakemiseen
     @GetMapping("/cities")
     public List<Kaupunki> getAllKaupungit() {
         return (List<Kaupunki>) kaupunkiRepository.findAll();
