@@ -3,11 +3,65 @@
 <head>
     <title>Retken tiedot</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <style>
+      
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #000;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 10px auto;
+            border: 1px solid #000;
+            text-decoration: none;
+            color: #000;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
 </head>
 <body>
     <h1>Retken tiedot</h1>
-    <table class="table table-striped">
+    <table>
         <tr>
             <th>Retken nimi:</th>
             <td th:text="${retki.retkinimi}"></td>
@@ -27,11 +81,11 @@
         <tr>
             <th>Osallistujat:</th>
             <td>
-                <span th:each="osallistuja : ${retki.osallistujat}" 
-                th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
+                <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
+                      th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
             </td>
         </tr>
     </table>
-    <a th:href="@{/retket}" class="btn btn-secondary">Takaisin retkien listaan</a>
+    <a th:href="@{/retket}" class="btn">Takaisin retkien listaan</a>
 </body>
 </html>

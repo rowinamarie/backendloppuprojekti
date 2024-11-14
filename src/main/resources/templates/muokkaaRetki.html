@@ -2,6 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Muokkaa retkeä</title>
+    <style>
+        /* Basic Black and White Styling */
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #fff;
+            padding: 20px;
+            margin: 0;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 15px;
+            border: 1px solid #000;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="date"], select, input[type="submit"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #000;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, select:focus {
+            outline: none;
+            border-color: #555;
+        }
+
+        input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #000;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
     <h1>Muokkaa retkeä</h1>
@@ -17,14 +86,13 @@
         </div>
         <div>
             <label for="kaupunkilista">Kaupunki</label>
-            <select id="kaupunkilista" th:field="*{kaupunki}" class="form-control">
-                  <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiId}" th:text="${kaupunki.kaupunkinimi}"></option>
-           </select>
+            <select id="kaupunkilista" th:field="*{kaupunki}">
+                <option th:each="kaupunki: ${kaupungit}" th:value="${kaupunki.kaupunkiId}" th:text="${kaupunki.kaupunkinimi}"></option>
+            </select>
         </div>
         <div>
-            <label for="alkupvm">Alkuperäinen päivämäärä:  <span th:text="${retki.paivamaara}"></span></label>
+            <label for="alkupvm">Alkuperäinen päivämäärä: <span th:text="${retki.paivamaara}"></span></label>
         </div>
-        
         <div>
             <label for="pvm">Uusi päivämäärä:</label>
             <input type="date" th:field="*{paivamaara}" />

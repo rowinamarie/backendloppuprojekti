@@ -4,31 +4,102 @@
     <title>Osallistumislomake</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
-<body>
-	<h1>Ilmoittaudu retkelle</h1>
-	<div>
-		<form th:object="${osallistuja}" th:action="@{/tallennaosallistuja}" action="#" method="post">
-		  	<label for="etunimi">Etunimi</label>
-			<input type="text" id="etunimi" th:field="*{etunimi}" />
-			<div th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}">Error</div>
-
-			<label for="sukunimi">Sukunimi</label>
-			<input type="text" id="sukunimi" th:field="*{sukunimi}" />
-			<div th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}">Error</div>
-
-			<label for="sahkoposti">Sahkoposti</label>
-			<input type="text" id="sahkoposti" th:field="*{sahkoposti}" />
-			<div th:if="${#fields.hasErrors('sahkoposti')}" th:errors="*{sahkoposti}">Error</div>
+<body><!DOCTYPE HTML>
+	<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>Osallistumislomake</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<style>
 			
-			<div style="clear: both; display: block; height: 10px;"></div>
-
-		  	<label for="retkilista">Valitse retki</label>
-			 <select id="retkilista" th:field="*{retki}" class="form-control">
-       			<option th:each="retki: ${retket}" th:value="${retki.retkiId}" th:text="${retki.retkinimi}"></option>
-    		</select>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Tallenna"></input>
-		</form>
-	</div>
-</body>
-</html>
+			body {
+				font-family: Arial, sans-serif;
+				color: #000;
+				background-color: #fff;
+				padding: 20px;
+				margin: 0;
+			}
+	
+			h1 {
+				text-align: center;
+				margin-bottom: 20px;
+				color: #000;
+			}
+	
+	
+			form {
+				max-width: 400px;
+				margin: 0 auto;
+				padding: 15px;
+				border: 1px solid #000;
+				background-color: #f9f9f9;
+				border-radius: 5px;
+			}
+	
+			label {
+				display: block;
+				margin-bottom: 5px;
+				font-weight: bold;
+			}
+	
+			input[type="text"], select, input[type="submit"] {
+				width: 100%;
+				padding: 8px;
+				margin-bottom: 15px;
+				border: 1px solid #000;
+				border-radius: 3px;
+				box-sizing: border-box;
+			}
+	
+			input[type="text"]:focus, select:focus {
+				outline: none;
+				border-color: #555;
+			}
+	
+			input[type="submit"] {
+				background-color: #000;
+				color: #fff;
+				cursor: pointer;
+				text-transform: uppercase;
+				font-weight: bold;
+			}
+	
+			input[type="submit"]:hover {
+				background-color: #555;
+			}
+	
+			.error-message {
+				color: #ff0000;
+				font-size: 0.9em;
+				margin-bottom: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Ilmoittaudu retkelle</h1>
+		<div>
+			<form th:object="${osallistuja}" th:action="@{/tallennaosallistuja}" action="#" method="post">
+				<label for="retkilista">Valitse retki</label>
+				<select id="retkilista" th:field="*{retki}">
+					<option th:each="retki: ${retket}" th:value="${retki.retkiId}" th:text="${retki.retkinimi}"></option>
+				</select>
+				
+				<label for="etunimi">Etunimi</label>
+				<input type="text" id="etunimi" th:field="*{etunimi}" />
+				<div th:if="${#fields.hasErrors('etunimi')}" th:errors="*{etunimi}" class="error-message">Error</div>
+	
+				<label for="sukunimi">Sukunimi</label>
+				<input type="text" id="sukunimi" th:field="*{sukunimi}" />
+				<div th:if="${#fields.hasErrors('sukunimi')}" th:errors="*{sukunimi}" class="error-message">Error</div>
+	
+				<label for="sahkoposti">Sähköposti</label>
+				<input type="text" id="sahkoposti" th:field="*{sahkoposti}" />
+				<div th:if="${#fields.hasErrors('sahkoposti')}" th:errors="*{sahkoposti}" class="error-message">Error</div>
+				
+				
+	
+				<input type="submit" value="Tallenna">
+			</form>
+		</div>
+	</body>
+	</html>
+	

@@ -1,49 +1,163 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <title>Studentlist</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
-
     <style>
-        table {
-            width: 60%;
+        /* Basic Black and White Styles */
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            background-color: #fff;
+            padding: 20px;
         }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        /* Table Styling */
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+        }
+
         th, td {
-            text-align: left; /* Tämä tasaa kaiken tekstin vasemmalle */
+            padding: 10px;
+            border: 1px solid #000;
+        }
+
+        th {
+            background-color: #e0e0e0;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        /* Button Styling */
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border: 1px solid #000;
+            text-decoration: none;
+            color: #000;
+            background-color: #fff;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e0e0e0;
+        }
+
+        .btn-danger {
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .btn-danger:hover {
+            background-color: #f0f0f0;
+        }
+
+        .btn-warning {
+            border: 1px solid #000;
+            background-color: #fff;
+            color: #000;
+        }
+
+        .btn-warning:hover {
+            background-color: #f0f0f0;
+        }
+
+        /* Logout Button */
+        .logout-button {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .logout-button form {
+            display: inline-block;
+        }
+
+        /* Add Event Button */
+        .add-event-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            border: 1px solid #000;
+            text-align: center;
+            color: #000;
+            background-color: #fff;
+            text-decoration: none;
+        }
+
+        .add-event-button:hover {
+            background-color: #e0e0e0;
         }
     </style>
 </head>
 <body>
 
-    <div sec:authorize="isAuthenticated()">
-        Kirjautunut käyttäjä: <span sec:authentication="name"></span>
+    <div class="user-info" sec:authorize="isAuthenticated()">
+        <h2>Kirjautunut käyttäjä: <span sec:authentication="name"></span></h2>
     </div>
 
-    <table class="table table-striped">
-		<tr>
-		    <th>Retken nimi</th>
-		    <th>Kuvaus</th>
-		    <th>Kaupunki</th>
-            <th>Päivämäärä</th>
-            <th>Osallistujat</th>
-		</tr>  
-    	<tr th:each = "retki : ${retket}">
-    		<td th:text="${retki.retkinimi}"></td>
-    		<td th:text="${retki.kuvaus}"></td>
-    		<td th:text="${retki.kaupunki.kaupunkinimi}"></td>
-            <td th:text="${retki.paivamaara}"></td>
+    <div class="logout-button" sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="btn btn-warning">Kirjaudu ulos</button>
+        </form>
+    </div>
 
-            <td>
-                <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
-                      th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
-            </td>  
-            <td sec:authorize="hasAuthority('OPETTAJA')"><a th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a></td> 
-            <td sec:authorize="hasAuthority('OPETTAJA')"> <a th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a></td> 
-            <td sec:authorize="hasAuthority('OPETTAJA')"><a th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a></td>
-            <td> <a th:href="@{/osallistu}" class="btn btn-danger">Osallistu retkelle</a></td>      	       		  		
-    	</tr>
-     </table>
-     <a th:href="@{/lisaa}" class="btn btn-danger" sec:authorize="hasAuthority('OPETTAJA')">Lisää uusi tapahtuma</a>
+    <h1>Retkilista</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Retken nimi</th>
+                <th>Kuvaus</th>
+                <th>Kaupunki</th>
+                <th>Päivämäärä</th>
+                <th>Osallistujat</th>
+                <th>Toiminnot</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="retki : ${retket}">
+                <td th:text="${retki.retkinimi}"></td>
+                <td th:text="${retki.kuvaus}"></td>
+                <td th:text="${retki.kaupunki.kaupunkinimi}"></td>
+                <td th:text="${retki.paivamaara}"></td>
+                <td>
+                    <span th:each="osallistuja, iterStat : ${retki.osallistujat}" 
+                          th:text="${osallistuja.etunimi} + (iterStat.hasNext ? ', ' : '')"></span>
+                </td>
+                <td>
+                    <div>
+                        <a sec:authorize="hasAuthority('OPETTAJA')" th:href="@{/osallistujat/{id}(id=${retki.retkiId})}" class="btn btn-danger">Näytä osallistujat</a>
+                    </div>
+                    <div>
+                        <a sec:authorize="hasAuthority('OPETTAJA')" th:href="@{/edit/{id}(id=${retki.retkiId})}" class="btn btn-danger">Muokkaa retkitietoja</a>
+                    </div>
+                    <div>
+                        <a sec:authorize="hasAuthority('OPETTAJA')" th:href="@{/delete/{id}(id=${retki.retkiId})}" class="btn btn-danger">Poista retki</a>
+                    </div>
+                    <div>
+                        <a  th:href="@{/osallistu}" class="btn btn-danger">Ilmoittaudu retkelle</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a th:href="@{/lisaa}" class="add-event-button" sec:authorize="hasAuthority('OPETTAJA')">Lisää uusi retki</a>
+
 </body>
 </html>
