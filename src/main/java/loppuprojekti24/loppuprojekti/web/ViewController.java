@@ -37,14 +37,18 @@ public class ViewController {
     // RETKEN NÄKYMÄT
 
     // Hakee view -näkymän kaikista retkistä
+    
     @RequestMapping(value = { "/", "/retket" })
+    @PreAuthorize("hasAuthority('OPETTAJA') or hasAuthority('OPPILAS')")
     public String showAllTrips(Model model) {
         model.addAttribute("retket", retkiRepository.findAll());
         return "retkilista";
     }
 
     // näyttää retkilomakkeen
+
     @RequestMapping(value = "/lisaa")
+    @PreAuthorize("hasAuthority('OPETTAJA') or hasAuthority('OPPILAS')")
     public String addTrip(Model model) {
         model.addAttribute("retki", new Retki());
         model.addAttribute("kaupungit", kaupunkiRepository.findAll());
@@ -125,6 +129,7 @@ public class ViewController {
 
     // näyttää osallistumislomakkeen
     @RequestMapping(value = "/osallistu")
+    @PreAuthorize("hasAuthority('OPETTAJA') or hasAuthority('OPPILAS')")
     public String addParticipant(Model model) {
         model.addAttribute("osallistuja", new Osallistuja());
         model.addAttribute("retket", retkiRepository.findAll());
@@ -133,6 +138,7 @@ public class ViewController {
 
     // Tallentaa osallistujalomakkeen
     @PostMapping("/tallennaosallistuja")
+    @PreAuthorize("hasAuthority('OPETTAJA') or hasAuthority('OPPILAS')")
     public String saveOsallistuja(@Valid Osallistuja osallistuja, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             System.out.println("Virheellinen osallistuja: " + osallistuja);
