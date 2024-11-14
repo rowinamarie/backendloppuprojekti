@@ -8,20 +8,22 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 public class Osallistuja {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "osallistuja_seq")
+    @SequenceGenerator(name = "osallistuja_seq", sequenceName = "osallistuja_seq", allocationSize = 1)
     private Long osallistujaId;
 
-    @NotEmpty (message = "Etunimi on pakollinen")
+    @NotEmpty(message = "Etunimi on pakollinen")
     private String etunimi;
-    @NotEmpty (message = "Sukunimi on pakollinen")
+    @NotEmpty(message = "Sukunimi on pakollinen")
     private String sukunimi;
-    @NotEmpty (message = "Sähköposti on pakollinen")
+    @NotEmpty(message = "Sähköposti on pakollinen")
     private String sahkoposti;
 
     @ManyToOne
@@ -33,7 +35,7 @@ public class Osallistuja {
 
     }
 
-    public Osallistuja(String etunimi,String sukunimi, String sahkoposti, Retki retki) {
+    public Osallistuja(String etunimi, String sukunimi, String sahkoposti, Retki retki) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
         this.sahkoposti = sahkoposti;
@@ -82,11 +84,9 @@ public class Osallistuja {
 
     @Override
     public String toString() {
-        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi + 
-                ", sukunimi=" + sukunimi + ", sahkoposti=" + sahkoposti + 
+        return "Osallistuja [osallistujaId=" + osallistujaId + ", etunimi=" + etunimi +
+                ", sukunimi=" + sukunimi + ", sahkoposti=" + sahkoposti +
                 ", retkiId=" + (retki != null ? retki.getRetkiId() : "null") + "]";
     }
-    
-
 
 }
