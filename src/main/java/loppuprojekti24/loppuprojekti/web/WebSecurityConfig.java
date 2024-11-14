@@ -19,17 +19,20 @@ public class WebSecurityConfig {
 	@Autowired
 	private UserDetailServiceImpl userDetailsService;
 
-    @Bean
+	@Bean
 	public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 		http
-			.authorizeHttpRequests(authorize -> authorize
-				.requestMatchers(antMatcher("/css/**")).permitAll() // Enable css when logged out
-				.anyRequest().authenticated()
-			).formLogin(formlogin -> formlogin
-				.defaultSuccessUrl("/retket", true).permitAll()
-			).logout(logout -> logout
-				.permitAll()
-			);
+				.csrf(csrf -> csrf.disable())
+				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers(antMatcher("/css/**")).permitAll() // Enable css when logged out
+						.requestMatchers("/trips").hasAuthority("OPETTAJA")
+						.requestMatchers("/participants").hasAuthority("OPETTAJA")
+						.anyRequest().permitAll())
+				.formLogin(formlogin -> formlogin
+						.defaultSuccessUrl("/retket", true).permitAll())
+				.logout(logout -> logout
+						.permitAll());
+
 		return http.build();
 	}
 
@@ -38,5 +41,3 @@ public class WebSecurityConfig {
 		auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
 	}
 }
-
-
