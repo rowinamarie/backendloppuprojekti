@@ -1,4 +1,4 @@
-package loppuprojekti24.loppuprojekti;
+/*package loppuprojekti24.loppuprojekti;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -72,3 +72,4 @@ public class LoppuprojektiApplication {
 		};
 	}
 }
+*/
