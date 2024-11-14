@@ -1,23 +1,11 @@
 package loppuprojekti24.loppuprojekti;
 
-import java.time.LocalDate;
-import java.util.HashSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import loppuprojekti24.loppuprojekti.domain.Kaupunki;
-import loppuprojekti24.loppuprojekti.domain.KaupunkiRepository;
-import loppuprojekti24.loppuprojekti.domain.Kayttaja;
-import loppuprojekti24.loppuprojekti.domain.KayttajaRepository;
-import loppuprojekti24.loppuprojekti.domain.Osallistuja;
-import loppuprojekti24.loppuprojekti.domain.OsallistujaRepository;
-import loppuprojekti24.loppuprojekti.domain.Retki;
-import loppuprojekti24.loppuprojekti.domain.RetkiRepository;
+;
 
 @SpringBootApplication
 public class LoppuprojektiApplication {
