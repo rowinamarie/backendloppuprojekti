@@ -1,4 +1,4 @@
-/*package loppuprojekti24.loppuprojekti;
+package loppuprojekti24.loppuprojekti;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -28,7 +28,7 @@ public class LoppuprojektiApplication {
 		SpringApplication.run(LoppuprojektiApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner tapahtumaDemo(KaupunkiRepository kaupunkiRepository, RetkiRepository retkiRepository,
 			OsallistujaRepository osallistujaRepository, KayttajaRepository kayttajaRepository) {
 		return (args) -> {
@@ -70,6 +70,5 @@ public class LoppuprojektiApplication {
 			kayttajaRepository.save(kayttaja2);
 
 		};
-	}
+	}*/
 }
-*/
